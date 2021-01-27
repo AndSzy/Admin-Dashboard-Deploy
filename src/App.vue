@@ -1,14 +1,39 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
     <router-view/>
   </div>
 </template>
 
 <style>
+:root {
+  /* Navbar */
+  --navbar-background: #33637a;
+  --navbar-color: #fff;
+
+  /* Sidebar */
+  --sidebar-background: #2d7293;
+  --sidebar-hover: #33637a;
+  --sidebar-dropdown-active: #42809d;
+
+  /* Main */
+  --main-background: #e7e9ee;
+
+  /* Overlay */
+  --overlay-background: rgba(0, 0, 0, 0.4);
+
+  /* Card */
+  --card-background: #33637a;
+
+  /* #221f1f   dark theme background */
+
+  /* Grid */
+  /* --cork-background: #e7e9ee; */
+
+  /* --darkblue: #33637a;  
+  --steelblue: #2d7293; */
+
+}
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
