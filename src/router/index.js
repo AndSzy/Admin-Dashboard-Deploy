@@ -7,14 +7,28 @@ Vue.use(VueRouter)
 const routes = [
   {
     path: '/',
-    alias: '/second',
-    name: 'Dashboard',
-    component: () => import('../views/DashboardView.vue'),
+    redirect: '/dashboard1',
+    name: 'Home',
+    component: () => import('../views/Home.vue'),
     meta: {
-      breadcrumb: "Dashboard"
+      breadcrumb: "Home"
+    },
+    children: [
+      {path: 'dashboard1',
+        component: () => import('../views/Dashboard.vue'),
+        meta: {
+          breadcrumb: "Dashboard_One"
+        }
+    },
+    {path: 'dashboard2',
+        component: () => import('../views/Dashboard.vue'),
+        meta: {
+          breadcrumb: "Dashboard_Two"
+        }
     }
+    ]
   },
-  
+
 ]
 
 const router = new VueRouter({

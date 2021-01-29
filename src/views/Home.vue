@@ -15,10 +15,16 @@
     <!-- Main Container -->
     <div
       class="main-container"
-      :class="{ sidebarOpen: !sidebardata.collapsed, mobile: sidebardata.hideOnMobile }"
+      :class="{
+        sidebarOpen: !sidebardata.collapsed,
+        mobile: sidebardata.hideOnMobile,
+      }"
     >
+      <!-- Tutaj trzeba dac router linka -->
       <!-- <draggable></draggable> -->
-      <draggable-with-date></draggable-with-date>
+      <!-- <draggable-with-date></draggable-with-date> -->
+
+      <router-view></router-view>
 
       <!-- Overlay -->
       <div class="overlay" @click="toggleSidebar"></div>
@@ -30,10 +36,10 @@
 </template>
 
 <script>
-import TheBreadcrumbs from '../components/TheBreadcrumbs.vue';
+import TheBreadcrumbs from "../components/TheBreadcrumbs.vue";
 import TheNavbar from "../components/TheNavbar.vue";
 import TheSidebar from "../components/TheSidebar.vue";
-import DraggableWithDate from "./DraggableWithDate.vue";
+// import DraggableWithDate from "./DraggableWithDate.vue";
 // import Draggable from "./Draggable.vue";
 
 export default {
@@ -42,7 +48,7 @@ export default {
     TheSidebar,
     // Draggable,
     TheBreadcrumbs,
-    DraggableWithDate
+    // DraggableWithDate
   },
   data() {
     return {
@@ -55,82 +61,59 @@ export default {
         width: "212px",
         hideOnMobile: window.innerWidth <= 600 ? true : false,
         menu: [
-        {
-          href: "/",
-          title: "Home",
-          icon: {
-            element: "font-awesome-icon",
-            attributes: {
-              icon: "home",
-            },
-          },
-        },
-        {
-          href: "/dashboard/first",
-          title: "Vue Draggable",
-          icon: {
-            element: "font-awesome-icon",
-            attributes: {
-              icon: "arrows-alt",
-            },
-          },
-        },
-        {
-          href: "/dashboard",
-          title: "Sidebar",
-          icon: {
-            element: "font-awesome-icon",
-            attributes: {
-              icon: "adjust",
-            },
-          },
-        },
-
-        {
-          //   href: "/",
-          title: "Charts",
-          icon: {
-            element: "font-awesome-icon",
-            attributes: {
-              icon: "chart-pie",
-            },
-          },
-          child: [
-            {
-              //   href: "/charts/sublink",
-              title: "Line",
-              icon: {
-                element: "font-awesome-icon",
-                attributes: {
-                  icon: "chart-line",
-                },
+          {
+            href: "/",
+            title: "Home",
+            icon: {
+              element: "font-awesome-icon",
+              attributes: {
+                icon: "home",
               },
             },
-
-            {
-              //   href: "/charts/sublink",
-              title: "Bar",
-              icon: {
-                element: "font-awesome-icon",
-                attributes: {
-                  icon: "chart-bar",
-                },
+          },
+          {
+            // href: "/",
+            title: "Dashboards",
+            icon: {
+              element: "font-awesome-icon",
+              attributes: {
+                icon: "tachometer-alt",
               },
             },
-
-            {
-              //   href: "/charts/sublink",
-              title: "Gauge",
-              icon: {
-                element: "font-awesome-icon",
-                attributes: {
-                  icon: "tachometer-alt",
+            child: [
+              {
+                href: "/dashboard1",
+                title: "Dashboard One",
+                icon: {
+                  element: "font-awesome-icon",
+                  attributes: {
+                    icon: "tachometer-alt",
+                  },
                 },
               },
+              {
+                href: "/dashboard2",
+                title: "Dashboard Two",
+                icon: {
+                  element: "font-awesome-icon",
+                  attributes: {
+                    icon: "tachometer-alt",
+                  },
+                },
+              },
+            ],
+          },
+          {
+            // href: "/edit",
+            title: "Edit",
+            icon: {
+              element: "font-awesome-icon",
+              attributes: {
+                icon: "edit",
+              },
             },
-          ],
-        },
-      ], 
+          },
+        ],
       },
     };
   },
