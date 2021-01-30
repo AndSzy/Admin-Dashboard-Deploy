@@ -4,11 +4,11 @@
       <!-- The Card -->
       <the-card v-for="item in charts" :key="item.id">
         <!-- Chart with custom datepicker -->
-        <chart-with-custom-datepicker :chart="item" v-model="pickerdata">
+        <line-chart :chart="item" v-model="pickerdata">
           <!-- My Datepicker -->
           <!-- <my-datepicker v-model="pickerdata"></my-datepicker> -->
-          <my-date-pick-component v-model="pickerdata"></my-date-pick-component>
-        </chart-with-custom-datepicker>
+          <the-date-pick v-model="pickerdata"></the-date-pick>
+        </line-chart>
       </the-card>
     </transition-group>
   </draggable>
@@ -17,17 +17,22 @@
 <script>
 import { dataset1, dataset2 } from "../utilities/mock/MockData.js";
 
+// import json from "../utilities/json/interestRates.json"
+
+import * as dashboards from "../dashboards/dashboards.js"
+
+
 import { v4 as uuidv4 } from "uuid";
 import draggable from "vuedraggable";
 import TheCard from "../components/TheCard.vue";
 
 // Datepicker added here:
 // import MyDatepicker from "../components/MyDatepicker.vue";
-import ChartWithCustomDatepicker from "../charts/ChartWithCustomDatepicker.vue";
+import LineChart from "../charts/LineChart.vue";
 
 // Second Datepicker:
 
-import MyDatePickComponent from "../components/MyDatePickComponent.vue";
+import TheDatePick from "../components/TheDatePick.vue";
 
 export default {
   name: "Home",
@@ -35,11 +40,21 @@ export default {
     draggable,
     TheCard,
     // MyDatepicker,
-    ChartWithCustomDatepicker,
-    MyDatePickComponent
+    LineChart,
+    TheDatePick
   },
   data() {
+    let mycharts
+    if(this.$route.name === "dashboard1") {
+      mycharts = dashboards.dashboard1;
+    } 
+    if(this.$route.name === "dashboard2") {
+      mycharts = dashboards.dashboard2;
+    } 
+
+
     return {
+      // myJson: json,
       pickerdata: {
         breakpoint: 800,
         start: '2013-08-01',
@@ -47,7 +62,7 @@ export default {
       },
       dataset1,
       dataset2,
-      charts: [],
+      charts: mycharts,
     };
   },
   methods: {
@@ -67,57 +82,86 @@ export default {
 
       this.charts = _charts;
     },
-    newComponent(newChart) {
+
+    // newComponent(newChart) {
+    //   let newChartObject = {};
+    //   newChartObject.id = uuidv4();
+    //   newChartObject.color = newChart.color;
+    //   newChartObject.chartType = newChart.chartType;
+    //   newChartObject.datasetName = newChart.datasetName;
+    //   if (newChart.datasetName === "data1") {
+    //     newChartObject.dataset = this.dataset1;
+    //   } else if (newChart.datasetName === "data2") {
+    //     newChartObject.dataset = this.dataset2;
+    //   }
+
+    //   this.charts.push(newChartObject);
+    // },
+
+    newChartFromJson(json) {
+      // console.log(json);
       let newChartObject = {};
       newChartObject.id = uuidv4();
-      newChartObject.color = newChart.color;
-      newChartObject.chartType = newChart.chartType;
-      newChartObject.datasetName = newChart.datasetName;
-      if (newChart.datasetName === "data1") {
-        newChartObject.dataset = this.dataset1;
-      } else if (newChart.datasetName === "data2") {
-        newChartObject.dataset = this.dataset2;
-      }
+      newChartObject.color = "#58f723";
+      newChartObject.chartType = "bar";
+      newChartObject.dataset = json;
 
       this.charts.push(newChartObject);
-    },
+    }
   },
   mounted() {
-    this.newComponent({
-      color: "#58f723",
-      chartType: "line",
-      datasetName: "data2",
-    });
-    this.newComponent({
-      color: "#dc0e28",
-      chartType: "bar",
-      datasetName: "data2",
-    });
-    this.newComponent({
-      color: "#303796",
-      chartType: "bar",
-      datasetName: "data1",
-    });
-    this.newComponent({
-      color: "#dc0e28",
-      chartType: "line",
-      datasetName: "data1",
-    });
-    this.newComponent({
-      color: "#3f3f3f",
-      chartType: "line",
-      datasetName: "data1",
-    });
-    this.newComponent({
-      color: "#ff9000",
-      chartType: "line",
-      datasetName: "data1",
-    });
-    this.newComponent({
-      color: "#307093",
-      chartType: "line",
-      datasetName: "data1",
-    });
+    // console.log(this.myJson);
+    // console.log(this.dataset1);
+
+
+    // console.log(this.$route.name);
+
+    // if(this.$route.name === "dashboard1") {
+    //   this.charts = this.dashboard1
+    // } else {
+    //   this.newChartFromJson(this.myJson.poland)
+    // }
+
+    
+    
+
+
+    // this.newComponent({
+    //   color: "#58f723",
+    //   chartType: "line",
+    //   datasetName: "data2",
+    // });
+    // this.newComponent({
+    //   color: "#dc0e28",
+    //   chartType: "bar",
+    //   datasetName: "data2",
+    // });
+    // this.newComponent({
+    //   color: "#303796",
+    //   chartType: "bar",
+    //   datasetName: "data1",
+    // });
+    // this.newComponent({
+    //   color: "#dc0e28",
+    //   chartType: "line",
+    //   datasetName: "data1",
+    // });
+    // this.newComponent({
+    //   color: "#3f3f3f",
+    //   chartType: "line",
+    //   datasetName: "data1",
+    // });
+    // this.newComponent({
+    //   color: "#ff9000",
+    //   chartType: "line",
+    //   datasetName: "data1",
+    // });
+    // this.newComponent({
+    //   color: "#307093",
+    //   chartType: "line",
+    //   datasetName: "data1",
+    // });
+    
   },
 };
 </script>

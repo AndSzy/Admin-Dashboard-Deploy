@@ -15,12 +15,14 @@ const routes = [
     },
     children: [
       {path: 'dashboard1',
+      name: 'dashboard1',
         component: () => import('../views/Dashboard.vue'),
         meta: {
           breadcrumb: "Dashboard_One"
         }
     },
     {path: 'dashboard2',
+    name: 'dashboard2',
         component: () => import('../views/Dashboard.vue'),
         meta: {
           breadcrumb: "Dashboard_Two"

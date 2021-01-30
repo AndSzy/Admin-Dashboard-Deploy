@@ -24,9 +24,9 @@ export default {
       this.$parent.$emit("datepickerInputChanged");
     },
   },
-  data: () => ({
-    date: "2019-01-01",
-  }),
+  // data: () => ({
+  //   date: "2019-01-01",
+  // }),
 };
 </script>
 

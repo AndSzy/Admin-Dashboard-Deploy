@@ -34,6 +34,10 @@
 
 }
 
+html {
+  background-color: var(--main-background);
+}
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;

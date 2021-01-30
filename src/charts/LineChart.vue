@@ -8,22 +8,22 @@
         <b-button @click="zoomOut" size="sm"
           ><b-icon-zoom-out></b-icon-zoom-out
         ></b-button>
-        <b-button @click="showPeriod(1)" size="sm">1D</b-button>
-        <b-button @click="showPeriod(10)" size="sm">10D</b-button>
-        <b-button @click="showPeriod(30)" size="sm">1M</b-button>
-        <b-button @click="showPeriod(90)" size="sm">3M</b-button>
-        <b-button @click="showPeriod(360)" size="sm">1Y</b-button>
-        <b-button @click="showPeriod(chart.dataset.length - 1)" size="sm"
-          >All</b-button
-        >
+        <!-- <b-button @click="showPeriod(1)" size="sm">1D</b-button> -->
+        <!-- <b-button @click="showPeriod(10)" size="sm">10D</b-button> -->
+        <!-- <b-button @click="showPeriod(30)" size="sm">1M</b-button> -->
+        <!-- <b-button @click="showPeriod(90)" size="sm">3M</b-button> -->
+        <!-- <b-button @click="showPeriod(360)" size="sm">1Y</b-button> -->
+        <!-- <b-button @click="showPeriod(chart.dataset.length - 1)" size="sm" -->
+          <!-- >All</b-button -->
+        <!-- > -->
       </b-row>
 
-      <b-row>
-        <b-form inline>
-          <!-- Slot for custom datepicker -->
-          <slot></slot>
-        </b-form>
-      </b-row>
+      <!-- <b-row> -->
+      <!-- <b-form inline> -->
+      <!-- Slot for custom datepicker -->
+      <!-- <slot></slot> -->
+      <!-- </b-form> -->
+      <!-- </b-row> -->
     </b-container>
     <zingchart
       :data="chartData"
@@ -38,8 +38,8 @@
 export default {
   mounted() {
     // Showing less data at the begining
-    let random = Math.floor(Math.random() * 10) + 5;
-    this.showPeriod(random);
+    // let random = Math.floor(Math.random() * 10) + 5;
+    // this.showPeriod(random);
 
     // call this to triger zoom event and update this.value
     // this.showPeriod(this.chart.dataset.length - 1);
@@ -60,8 +60,17 @@ export default {
   data() {
     return {
       chartData: {
+        legend: {
+          backgroundColor: "transparent",
+          border: "none",
+          layout: "h"
+        },
+        title: {
+          text: this.chart.title,
+        },
         theme: "dark",
         backgroundColor: "#33637a",
+        // ///////////////////////////////////////////////////////chartType
         type: this.chart.chartType,
         // preview: {},
         zoom: {
@@ -81,22 +90,24 @@ export default {
           },
         },
         scaleX: {
-          label: { text: "Time" },
+          label: { text: this.chart.text },
           zooming: true,
           // number of lables below x-line
           maxItems: 5,
           item: {
             fontSize: 10,
           },
-          step: "day",
-          transform: {
-            type: "date",
-            all: "%dd/%M/%y",
-          },
+          // transform
+          // step: "day",
+          // transform: {
+          //   type: "date",
+          //   all: "%dd/%M/%y",
+          // },
         },
         scaleY: {
-          label: { text: "Usage" },
+          // label: { text: "Usage" },
           // zooming: true,
+          values: "-2:7:1",
           item: {
             "font-size": 10,
           },
@@ -106,6 +117,7 @@ export default {
           },
         },
         plot: {
+          // ///////////////////////////////////////////////////////color
           // Line chart
           "line-color": this.chart.color,
 
@@ -122,16 +134,19 @@ export default {
           text: "%kt: %v",
         },
 
-        series: [
-          {
-            values: this.chart.dataset,
+        series: this.chart.dataset,
+
+
+          // {
+            // ///////////////////////////////////////////////////////dataset
+            // values: this.chart.dataset,
             // samplingStep: 2,
-            marker: {
-              backgroundColor: this.chart.color,
-              size: 4,
-            },
-          },
-        ],
+            // marker: {
+            //   backgroundColor: this.chart.color,
+            //   size: 4,
+            // },
+          // },
+        
       },
     };
   },
