@@ -83,7 +83,7 @@ export default {
             child: [
               {
                 href: "/dashboard1",
-                title: "Dashboard One",
+                title: "Inflation",
                 icon: {
                   element: "font-awesome-icon",
                   attributes: {
@@ -93,7 +93,7 @@ export default {
               },
               {
                 href: "/dashboard2",
-                title: "Dashboard Two",
+                title: "Inflation-Single",
                 icon: {
                   element: "font-awesome-icon",
                   attributes: {

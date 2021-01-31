@@ -36,6 +36,7 @@
 
 html {
   background-color: var(--main-background);
+  overflow-x: hidden;
 }
 
 #app {
