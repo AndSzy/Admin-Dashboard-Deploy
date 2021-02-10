@@ -1,4 +1,3 @@
-// Test
 <template>
   <div class="dashboard-view">
     <!-- The Navbar -->
