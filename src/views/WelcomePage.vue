@@ -16,26 +16,19 @@ export default {};
 
 <style>
 .welcome-page {
-  /* padding: 20px; */
-  /* color: var(--navbar-background); */
-
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   margin-top: 81px;
   margin-left: 37px;
+  margin-right: 18px;
 }
 
-/* .welcome-page h1 {
-    font-size: 40px;
-} */
 
 .welcome-page .welcome-title {
-  /* width: 600px; */
   color: #000;
   margin-bottom: 32px;
   text-align: left;
-  /* font-family: 'SharpGroteskWide'; */
   font-weight: 500;
   font-size: 40px;
   line-height: 48px;
@@ -49,7 +42,6 @@ export default {};
   color: #000;
   margin-bottom: 32px;
   text-align: left;
-  /* font-family: 'SharpGrotesk'; */
   font-weight: 400;
 }
 

@@ -24,7 +24,7 @@
       <!-- <draggable></draggable> -->
       <!-- <draggable-with-date></draggable-with-date> -->
 
-      <router-view :key="$route.fullPath"></router-view>
+      <router-view :key="$route.fullPath" :mobile="sidebardata.hideOnMobile"></router-view>
 
       <!-- Overlay -->
       <div class="overlay" @click="toggleSidebar"></div>

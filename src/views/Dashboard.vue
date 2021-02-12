@@ -1,5 +1,5 @@
 <template>
-  <draggable v-model="charts" :move="handleMove" @end="handleDragEnd">
+  <draggable :disabled="mobile" v-model="charts" :move="handleMove" @end="handleDragEnd">
     <transition-group tag="div" class="grid" name="grid">
       <!-- The Card -->
       <the-card v-for="item in charts" :key="item.id">
@@ -42,6 +42,11 @@ export default {
     // MyDatepicker,
     LineChart,
     TheDatePick
+  },
+  props: {
+    mobile: {
+      type: Boolean
+    }
   },
   data() {
     let mycharts
