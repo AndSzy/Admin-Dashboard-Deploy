@@ -6,6 +6,7 @@ import zingchart from 'zingchart/es6';
 import zingchartVue from 'zingchart-vue';
 
 zingchart.DEV.DEBOUNCESPEED = 50;
+zingchart.TOUCHZOOM = 'pinch';
 
 import { BootstrapVue, BootstrapVueIcons } from 'bootstrap-vue'
 
