@@ -14,7 +14,7 @@
         <!-- <b-button @click="showPeriod(90)" size="sm">3M</b-button> -->
         <!-- <b-button @click="showPeriod(360)" size="sm">1Y</b-button> -->
         <!-- <b-button @click="showPeriod(chart.dataset.length - 1)" size="sm" -->
-          <!-- >All</b-button -->
+        <!-- >All</b-button -->
         <!-- > -->
       </b-row>
 
@@ -60,10 +60,18 @@ export default {
   data() {
     return {
       chartData: {
+        gui: {
+          contextMenu: {
+            button: {
+              visible: false,
+            },
+            empty: true,
+          },
+        },
         legend: {
           backgroundColor: "transparent",
           border: "none",
-          layout: "h"
+          layout: "h",
         },
         title: {
           text: this.chart.title,
@@ -136,17 +144,15 @@ export default {
 
         series: this.chart.dataset,
 
-
-          // {
-            // ///////////////////////////////////////////////////////dataset
-            // values: this.chart.dataset,
-            // samplingStep: 2,
-            // marker: {
-            //   backgroundColor: this.chart.color,
-            //   size: 4,
-            // },
-          // },
-        
+        // {
+        // ///////////////////////////////////////////////////////dataset
+        // values: this.chart.dataset,
+        // samplingStep: 2,
+        // marker: {
+        //   backgroundColor: this.chart.color,
+        //   size: 4,
+        // },
+        // },
       },
     };
   },
