@@ -34,6 +34,7 @@ export default {
   data() {
     return {
       chartData: {
+        // Hide context menu
         gui: {
           contextMenu: {
             button: {
@@ -42,11 +43,13 @@ export default {
             empty: true,
           },
         },
+        // series legend
         legend: {
           backgroundColor: "transparent",
           border: "none",
           layout: "h",
         },
+        // title on the top
         title: {
           text: this.chart.title,
         },
@@ -61,16 +64,17 @@ export default {
           borderColor: "#3399ff",
           alpha: 0.3,
         },
+        // Scrollbar styling
         scrollX: {
           bar: {
             backgroundColor: "#adc0c9",
-            // height: "15px"
           },
           handle: {
             backgroundColor: "#2d596d",
             height: "15px",
           },
         },
+        // Label under the chart
         scaleX: {
           label: { text: this.chart.text },
           zooming: true,
@@ -79,16 +83,8 @@ export default {
           item: {
             fontSize: 10,
           },
-          // transform
-          // step: "day",
-          // transform: {
-          //   type: "date",
-          //   all: "%dd/%M/%y",
-          // },
         },
         scaleY: {
-          // label: { text: "Usage" },
-          // zooming: true,
           values: "-2:7:1",
           item: {
             "font-size": 10,
@@ -107,6 +103,7 @@ export default {
           "background-color": this.chart.color,
           alpha: 0.8,
         },
+        // tooltip styling
         tooltip: {
           callout: true,
           borderColor: "#F4F2F2",
@@ -116,16 +113,12 @@ export default {
           text: "%kt: %v",
         },
 
+        //dataset from json
         series: this.chart.dataset,
 
         // {
         // ///////////////////////////////////////////////////////dataset
         // values: this.chart.dataset,
-        // samplingStep: 2,
-        // marker: {
-        //   backgroundColor: this.chart.color,
-        //   size: 4,
-        // },
         // },
       },
     };
