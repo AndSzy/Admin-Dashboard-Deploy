@@ -8,50 +8,24 @@
         <b-button @click="zoomOut" size="sm"
           ><b-icon-zoom-out></b-icon-zoom-out
         ></b-button>
-        <!-- <b-button @click="showPeriod(1)" size="sm">1D</b-button> -->
-        <!-- <b-button @click="showPeriod(10)" size="sm">10D</b-button> -->
-        <!-- <b-button @click="showPeriod(30)" size="sm">1M</b-button> -->
-        <!-- <b-button @click="showPeriod(90)" size="sm">3M</b-button> -->
-        <!-- <b-button @click="showPeriod(360)" size="sm">1Y</b-button> -->
-        <!-- <b-button @click="showPeriod(chart.dataset.length - 1)" size="sm" -->
-        <!-- >All</b-button -->
-        <!-- > -->
+        
+        <b-button @click="showAll()" size="sm"
+        >All</b-button>
       </b-row>
 
-      <!-- <b-row> -->
-      <!-- <b-form inline> -->
-      <!-- Slot for custom datepicker -->
-      <!-- <slot></slot> -->
-      <!-- </b-form> -->
-      <!-- </b-row> -->
     </b-container>
     <zingchart
       :data="chartData"
       output="canvas"
       :ref="chart.id"
-      @zoom="zoomEvent"
+      
     ></zingchart>
   </div>
 </template>
 
 <script>
 export default {
-  mounted() {
-    // Showing less data at the begining
-    // let random = Math.floor(Math.random() * 10) + 5;
-    // this.showPeriod(random);
-
-    // call this to triger zoom event and update this.value
-    // this.showPeriod(this.chart.dataset.length - 1);
-
-    // listen for a input from slot
-    this.$on("datepickerInputChanged", this.inputChanged);
-  },
   props: {
-    value: {
-      type: Object,
-      required: true,
-    },
     chart: {
       type: Object,
       required: true,
@@ -157,29 +131,10 @@ export default {
     };
   },
   methods: {
-    inputChanged() {
-      this.showCustom(this.value.start, this.value.end);
-    },
-    zoomEvent(e) {
-      // Changing to format that is accepted by MyDatePickComponent
-      let options = { year: "numeric", month: "numeric", day: "numeric" };
-      this.value.start = new Date(e.kmin).toLocaleString("fr-CA", options);
-      this.value.end = new Date(e.kmax).toLocaleString("fr-CA", options);
-    },
-    showPeriod(period) {
-      const lastEntry = this.chart.dataset.length - 1;
-
+    showAll() {
       this.$refs[this.chart.id].zoomtovalues({
-        xmin: lastEntry - period,
-        xmax: lastEntry,
-      });
-    },
-    showCustom(start, end) {
-      let startDateUnix = new Date(start).getTime();
-      let endDateUnix = new Date(end).getTime();
-      this.$refs[this.chart.id].zoomto({
-        kmin: startDateUnix,
-        kmax: endDateUnix,
+        xmin: this.chart.dataset[0].values[0][0],
+        xmax: this.chart.dataset[0].values[this.chart.dataset[0].values.length-1][0]
       });
     },
     zoomIn() {

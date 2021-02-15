@@ -1,5 +1,5 @@
 <template>
-  <b-card no-body class="text-center" :class="{ span: span }">
+  <b-card no-body class="text-center" :class="{ span: localSpan }">
     <b-button class="doubleSizeBtn" @click="toggleSpan" size="sm">
       <font-awesome-icon icon="arrows-alt-h"  />
     </b-button>
@@ -9,14 +9,19 @@
 
 <script>
 export default {
+  props: {
+    span: {
+      type: Boolean
+    }
+  },
   data() {
     return {
-      span: false,
+      localSpan: this.span,
     };
   },
   methods: {
     toggleSpan() {
-      this.span = !this.span;
+      this.localSpan = !this.localSpan;
     },
   },
 };

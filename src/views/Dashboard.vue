@@ -2,7 +2,7 @@
   <draggable :disabled="mobile" v-model="charts" :move="handleMove" @end="handleDragEnd">
     <transition-group tag="div" class="grid" name="grid">
       <!-- The Card -->
-      <the-card v-for="item in charts" :key="item.id">
+      <the-card v-for="item in charts" :key="item.id" :span="item.span">
         <!-- Chart with custom datepicker -->
         <line-chart :chart="item" v-model="pickerdata">
           <!-- My Datepicker -->
