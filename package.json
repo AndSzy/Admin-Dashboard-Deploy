@@ -14,6 +14,7 @@
     "bootstrap": "^4.6.0",
     "bootstrap-vue": "^2.21.2",
     "core-js": "^3.6.5",
+    "firebase": "^8.2.7",
     "vue": "^2.6.12",
     "vue-2-breadcrumbs": "^0.7.12",
     "vue-date-pick": "^1.4.1",

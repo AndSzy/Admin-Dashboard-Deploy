@@ -1,5 +1,10 @@
 <template>
-  <draggable :disabled="mobile" v-model="charts" :move="handleMove" @end="handleDragEnd">
+  <draggable
+    :disabled="mobile"
+    v-model="charts"
+    :move="handleMove"
+    @end="handleDragEnd"
+  >
     <transition-group tag="div" class="grid" name="grid">
       <!-- The Card -->
       <the-card v-for="item in charts" :key="item.id" :span="item.span">
@@ -19,8 +24,7 @@ import { dataset1, dataset2 } from "../utilities/mock/MockData.js";
 
 // import json from "../utilities/json/interestRates.json"
 
-import * as dashboards from "../dashboards/dashboards.js"
-
+import * as dashboards from "../dashboards/dashboards.js";
 
 import { v4 as uuidv4 } from "uuid";
 import draggable from "vuedraggable";
@@ -34,6 +38,9 @@ import LineChart from "../charts/LineChart.vue";
 
 import TheDatePick from "../components/TheDatePick.vue";
 
+// Firebase
+import { database } from "../config/firebaseConfig.js";
+
 export default {
   name: "Home",
   components: {
@@ -41,33 +48,33 @@ export default {
     TheCard,
     // MyDatepicker,
     LineChart,
-    TheDatePick
+    TheDatePick,
   },
   props: {
     mobile: {
-      type: Boolean
-    }
+      type: Boolean,
+    },
   },
   data() {
-    let mycharts
-    if(this.$route.name === "dashboard1") {
+    let mycharts;
+    if (this.$route.name === "dashboard1") {
       mycharts = dashboards.dashboard1;
-    } 
-    if(this.$route.name === "dashboard2") {
+    }
+    if (this.$route.name === "dashboard2") {
       mycharts = dashboards.dashboard2;
-    } 
-
+    }
 
     return {
       // myJson: json,
       pickerdata: {
         breakpoint: 800,
-        start: '2013-08-01',
-        end: '2013-09-01',
+        start: "2013-08-01",
+        end: "2013-09-01",
       },
       dataset1,
       dataset2,
       charts: mycharts,
+      database,
     };
   },
   methods: {
@@ -112,61 +119,20 @@ export default {
       newChartObject.dataset = json;
 
       this.charts.push(newChartObject);
-    }
+    },
+    readDatabase() {
+      console.log("Reading...");
+      
+      let japan = database.ref('japan').get().then(function(snapshot) {
+        console.log("Im inside promise !!");
+        console.log(snapshot.val());
+      });
+
+      console.log(japan);
+    },
   },
   mounted() {
-    // console.log(this.myJson);
-    // console.log(this.dataset1);
-
-
-    // console.log(this.$route.name);
-
-    // if(this.$route.name === "dashboard1") {
-    //   this.charts = this.dashboard1
-    // } else {
-    //   this.newChartFromJson(this.myJson.poland)
-    // }
-
-    
-    
-
-
-    // this.newComponent({
-    //   color: "#58f723",
-    //   chartType: "line",
-    //   datasetName: "data2",
-    // });
-    // this.newComponent({
-    //   color: "#dc0e28",
-    //   chartType: "bar",
-    //   datasetName: "data2",
-    // });
-    // this.newComponent({
-    //   color: "#303796",
-    //   chartType: "bar",
-    //   datasetName: "data1",
-    // });
-    // this.newComponent({
-    //   color: "#dc0e28",
-    //   chartType: "line",
-    //   datasetName: "data1",
-    // });
-    // this.newComponent({
-    //   color: "#3f3f3f",
-    //   chartType: "line",
-    //   datasetName: "data1",
-    // });
-    // this.newComponent({
-    //   color: "#ff9000",
-    //   chartType: "line",
-    //   datasetName: "data1",
-    // });
-    // this.newComponent({
-    //   color: "#307093",
-    //   chartType: "line",
-    //   datasetName: "data1",
-    // });
-    
+    this.readDatabase();
   },
 };
 </script>
