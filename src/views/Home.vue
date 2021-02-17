@@ -20,11 +20,11 @@
         mobile: sidebardata.hideOnMobile,
       }"
     >
-      <!-- Tutaj trzeba dac router linka -->
-      <!-- <draggable></draggable> -->
-      <!-- <draggable-with-date></draggable-with-date> -->
-
-      <router-view :key="$route.fullPath" :mobile="sidebardata.hideOnMobile"></router-view>
+      <router-view
+        :key="$route.fullPath"
+        :mobile="sidebardata.hideOnMobile"
+        :dashboards="dataFromHome"
+      ></router-view>
 
       <!-- Overlay -->
       <div class="overlay" @click="toggleSidebar"></div>
@@ -39,19 +39,29 @@
 import TheBreadcrumbs from "../components/TheBreadcrumbs.vue";
 import TheNavbar from "../components/TheNavbar.vue";
 import TheSidebar from "../components/TheSidebar.vue";
-// import DraggableWithDate from "./DraggableWithDate.vue";
-// import Draggable from "./Draggable.vue";
+
+// Importing dashboards - this will be fetched from database
+
+import * as dashboards from "../dashboards/dashboards.js";
 
 export default {
   components: {
     TheNavbar,
     TheSidebar,
-    // Draggable,
     TheBreadcrumbs,
-    // DraggableWithDate
   },
   data() {
+
+    let mycharts;
+    if (this.$route.name === "dashboard1") {
+      mycharts = dashboards.listOfDashboards[0];
+    }
+    if (this.$route.name === "dashboard2") {
+      mycharts = dashboards.listOfDashboards[1];
+    }
+
     return {
+      dataFromHome: mycharts,
       sidebardata: {
         collapsed: window.innerWidth <= 1090 ? true : false,
         showChild: false,
@@ -116,6 +126,16 @@ export default {
         ],
       },
     };
+  },
+  watch: {
+    $route(to) {
+      if (to.name === "dashboard1") {
+        this.dataFromHome = dashboards.listOfDashboards[0];
+      }
+      if (to.name === "dashboard2") {
+        this.dataFromHome = dashboards.listOfDashboards[1];
+      }
+    },
   },
   methods: {
     toggleSidebar() {
