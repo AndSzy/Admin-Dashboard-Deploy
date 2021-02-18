@@ -44,8 +44,17 @@ export default {
     }
   },
   data() {
+
+     let mycharts;
+    if (this.$route.name === "dashboard1") {
+      mycharts = this.dashboards[0];
+    }
+    if (this.$route.name === "dashboard2") {
+      mycharts = this.dashboards[1];
+    }
+
     return {
-      charts: this.dashboards,
+      charts: mycharts,
       localData: {}
     };
   },

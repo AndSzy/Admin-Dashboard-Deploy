@@ -14,6 +14,7 @@
 
     <!-- Main Container -->
     <div
+      
       class="main-container"
       :class="{
         sidebarOpen: !sidebardata.collapsed,
@@ -21,6 +22,7 @@
       }"
     >
       <router-view
+      v-if="!isLoading"
         :key="$route.fullPath"
         :mobile="sidebardata.hideOnMobile"
         :dashboards="dataFromHome"
@@ -42,7 +44,7 @@ import TheSidebar from "../components/TheSidebar.vue";
 
 // Importing dashboards - this will be fetched from database
 
-import * as dashboards from "../dashboards/dashboards.js";
+// import * as dashboards from "../dashboards/dashboards.js";
 
 export default {
   components: {
@@ -52,16 +54,19 @@ export default {
   },
   data() {
 
-    let mycharts;
-    if (this.$route.name === "dashboard1") {
-      mycharts = dashboards.listOfDashboards[0];
-    }
-    if (this.$route.name === "dashboard2") {
-      mycharts = dashboards.listOfDashboards[1];
-    }
-
+    // let mycharts;
+    // if (this.$route.name === "dashboard1") {
+    //   mycharts = dashboards.listOfDashboards[0];
+    // }
+    // if (this.$route.name === "dashboard2") {
+    //   mycharts = dashboards.listOfDashboards[1];
+    // }
     return {
-      dataFromHome: mycharts,
+      isLoading: true,
+      inflation: [[2009, 1.96], [2010, 2.49], [2011, 5.49]],
+      // dataFromHome: mycharts,
+      dataFromHome: [], 
+
       sidebardata: {
         collapsed: window.innerWidth <= 1090 ? true : false,
         showChild: false,
@@ -127,20 +132,34 @@ export default {
       },
     };
   },
-  watch: {
-    $route(to) {
-      if (to.name === "dashboard1") {
-        this.dataFromHome = dashboards.listOfDashboards[0];
-      }
-      if (to.name === "dashboard2") {
-        this.dataFromHome = dashboards.listOfDashboards[1];
-      }
-    },
-  },
+  // watch: {
+  //   $route(to) {
+  //     if (to.name === "dashboard1") {
+  //       this.dataFromHome = dashboards.listOfDashboards[0];
+  //     }
+  //     if (to.name === "dashboard2") {
+  //       this.dataFromHome = dashboards.listOfDashboards[1];
+  //     }
+  //   },
+  // },
   methods: {
     toggleSidebar() {
       this.sidebardata.collapsed = !this.sidebardata.collapsed;
     },
+    fetchData() {
+      this.isLoading = true;
+      fetch('https://admin-dashboard-980b3-default-rtdb.firebaseio.com/inflation.json')
+        .then(res => res.json())
+        .then((data) => {
+          console.log(data);
+          this.dataFromHome = data;
+          this.isLoading = false;
+          
+        })
+    }
+  },
+  mounted() {
+    this.fetchData()
   },
   created() {
     // Listening to window width change
