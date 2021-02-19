@@ -45,6 +45,8 @@ export default {
   },
   data() {
 
+    // Filtering data - needs to be moved to server
+
      let mycharts;
     if (this.$route.name === "dashboard1") {
       mycharts = this.dashboards[0];

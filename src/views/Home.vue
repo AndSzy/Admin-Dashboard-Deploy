@@ -14,7 +14,6 @@
 
     <!-- Main Container -->
     <div
-      
       class="main-container"
       :class="{
         sidebarOpen: !sidebardata.collapsed,
@@ -22,7 +21,7 @@
       }"
     >
       <router-view
-      v-if="!isLoading"
+        v-if="!isLoading"
         :key="$route.fullPath"
         :mobile="sidebardata.hideOnMobile"
         :dashboards="dataFromHome"
@@ -42,10 +41,6 @@ import TheBreadcrumbs from "../components/TheBreadcrumbs.vue";
 import TheNavbar from "../components/TheNavbar.vue";
 import TheSidebar from "../components/TheSidebar.vue";
 
-// Importing dashboards - this will be fetched from database
-
-// import * as dashboards from "../dashboards/dashboards.js";
-
 export default {
   components: {
     TheNavbar,
@@ -53,19 +48,9 @@ export default {
     TheBreadcrumbs,
   },
   data() {
-
-    // let mycharts;
-    // if (this.$route.name === "dashboard1") {
-    //   mycharts = dashboards.listOfDashboards[0];
-    // }
-    // if (this.$route.name === "dashboard2") {
-    //   mycharts = dashboards.listOfDashboards[1];
-    // }
     return {
       isLoading: true,
-      inflation: [[2009, 1.96], [2010, 2.49], [2011, 5.49]],
-      // dataFromHome: mycharts,
-      dataFromHome: [], 
+      dataFromHome: [],
 
       sidebardata: {
         collapsed: window.innerWidth <= 1090 ? true : false,
@@ -148,18 +133,19 @@ export default {
     },
     fetchData() {
       this.isLoading = true;
-      fetch('https://admin-dashboard-980b3-default-rtdb.firebaseio.com/inflation.json')
-        .then(res => res.json())
+      fetch(
+        "https://admin-dashboard-980b3-default-rtdb.firebaseio.com/inflation.json"
+      )
+        .then((res) => res.json())
         .then((data) => {
-          console.log(data);
           this.dataFromHome = data;
           this.isLoading = false;
-          
-        })
-    }
+        });
+    },
   },
   mounted() {
-    this.fetchData()
+    this.fetchData();
+    console.log(this.myResult);
   },
   created() {
     // Listening to window width change
