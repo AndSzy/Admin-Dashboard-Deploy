@@ -145,7 +145,6 @@ export default {
   },
   mounted() {
     this.fetchData();
-    console.log(this.myResult);
   },
   created() {
     // Listening to window width change
