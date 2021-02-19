@@ -34,10 +34,12 @@ export default {
     // onItemClick(event, item, node)
     onItemClick(event, node) {
       let expandableList = document.querySelector(".v-sidebar-menu .vsm--mobile-item");
-      if (node.child) {
+      if (expandableList) {
+        if (node.child) {
         expandableList.style.display = "block";
       } else {
         expandableList.style.display = "none";
+      }
       }
     },
   },
